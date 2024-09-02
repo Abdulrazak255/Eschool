@@ -1,0 +1,43 @@
+<!-- teacher-dashboard.component.html -->
+<div>
+  <!-- Buttons for navigation -->
+  <mat-menu>
+    <button mat-menu-item (click)="getClasses()">Classes</button>
+    <button mat-menu-item (click)="getSubjects()">Subjects</button>
+  </mat-menu>
+
+  <!-- List of classes -->
+  <div *ngIf="showClasses" class="class-list">
+    <button mat-raised-button *ngFor="let class of classes" (click)="getStudents(class.id)">
+      {{ class.name }}
+    </button>
+  </div>
+
+  <!-- List of students in a class -->
+  <div *ngIf="showStudents" class="student-list">
+    <button mat-raised-button *ngFor="let student of students" (click)="getStudentInfo(student.id)">
+      {{ student.name }}
+    </button>
+  </div>
+
+  <!-- Student information and grades -->
+  <div *ngIf="showStudentInfo" class="student-info">
+    <mat-list>
+      <mat-list-item *ngFor="let grade of grades">
+        <h3 matLine>{{ grade.subject.name }}</h3>
+        <p matLine>First Test: {{ grade.firstTest }}</p>
+        <p matLine>Second Test: {{ grade.secondTest }}</p>
+        <p matLine>First Exam: {{ grade.firstExam }}</p>
+        <p matLine>Second Exam: {{ grade.secondExam }}</p>
+        <p matLine>Average: {{ grade.average }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- List of subjects -->
+  <div *ngIf="showSubjects" class="subject-list">
+    <ul>
+      <li *ngFor="let subject of subjects">{{ subject.name }}</li>
+    </ul>
+  </div>
+</div>

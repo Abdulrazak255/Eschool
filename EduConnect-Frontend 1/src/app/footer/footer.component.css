@@ -1,0 +1,9 @@
+
+footer {
+  background-color: #f8f9fa; /* يمكنك تغيير الخلفية حسب رغبتك */
+  text-align: center;
+  padding: 10px 0;
+  position: absolute; /* تثبيت الـ footer في الأسفل */
+  bottom: 0;
+  width: 100%;
+}

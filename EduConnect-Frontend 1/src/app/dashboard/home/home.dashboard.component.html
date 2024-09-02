@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="myDrawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="flex: 1;"></span>
+  <button mat-button routerLink="/admin/home">Home</button>
+  <button mat-button routerLink="/admin/teacher">Teacher</button>
+  <button mat-button routerLink="/admin/student">Student</button>
+  <button mat-button routerLink="/admin/manager">Manager</button>
+  <button mat-button routerLink="/admin/parent">Parent</button>
+  <button *ngIf="authService.roles.includes('ADMIN')" mat-button [matMenuTriggerFor]="importMenu">Import</button>
+  <mat-menu #importMenu="matMenu">
+    <button mat-menu-item routerLink="/admin/loadStudents">Load Students</button>
+    <button mat-menu-item routerLink="/admin/loadTeachers">Load Teachers</button>
+  </mat-menu>
+  <span *ngIf="authService.isAuthenticated" class="ml-auto">
+    <button mat-button>
+      {{authService.username}}
+    </button>
+    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+  </span>
+</mat-toolbar>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #myDrawer position="start" mode="side" opened>
+    <mat-list>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/students">Students</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button routerLink="/admin/teacher">Teacher</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

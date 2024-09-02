@@ -1,0 +1,22 @@
+<mat-toolbar class="bg-primary text-light">
+  <button mat-button [routerLink]="'/home'" class="text-light font-weight-bold text-white h4">
+    EduConnect
+  </button>
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="!authService.isAuthenticated; else authenticated">
+    <button mat-button [routerLink]="'/login'" class="text-light">
+      <mat-icon>login</mat-icon> Login
+    </button>
+    <button mat-button [routerLink]="'/register'" class="text-light">
+      <mat-icon>person_add</mat-icon> Register
+    </button>
+  </ng-container>
+
+  <ng-template #authenticated>
+    <span class="text-light mr-2">Welcome, {{ authService.username }}</span>
+    <button mat-button (click)="logout()" class="text-light">
+      <mat-icon>logout</mat-icon> Logout
+    </button>
+  </ng-template>
+</mat-toolbar>
