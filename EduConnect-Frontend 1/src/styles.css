@@ -1,0 +1,131 @@
+/* استيراد إطار العمل Bootstrap لإضافة أنماط أساسية إضافية */
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css';
+
+/* الخطوط والألوان العامة */
+body, html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  position: relative; /* لضمان أن الحاوية الرئيسية تعتبر مرجعاً */
+}
+
+main {
+  flex: 1; /* يجعل القسم الرئيسي يملأ المساحة المتبقية */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* تحسين المظهر الافتراضي لكل الأزرار */
+button, .mat-button {
+  font-family: 'Cairo', sans-serif;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* تحريك عند التمرير فوق الأزرار */
+button:hover, .mat-button:hover {
+  opacity: 0.9;
+}
+
+/* إعدادات العنوان */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin: 0;
+}
+
+/* إعدادات عامة للرأس */
+header {
+  background-color: #ffffff;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* إعدادات تنسيق المدخلات */
+.mat-form-field {
+  margin-left: auto; /* يثبت زر البحث في الزاوية اليمنى */
+  width: 300px; /* عرض ثابت لحقل البحث */
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline {
+  color: #3498db; /* لون تركيز عند الكتابة */
+}
+
+/* إعدادات الشريط الجانبي */
+aside {
+  background-color: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  padding: 1rem;
+  min-width: 200px; /* عرض ثابت للشريط الجانبي */
+}
+
+/* إعدادات تنسيق أزرار الشريط الجانبي */
+.sidebar-button {
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: left;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* إعدادات الشريط الجانبي للصفحات */
+.dashboard-body {
+  display: flex;
+}
+
+/* إعدادات الأقسام في الصفحة */
+section {
+  margin-bottom: 2rem;
+}
+
+/* تحسين مظهر بطاقات المواد */
+.mat-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.mat-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* إعدادات المعلومات الشخصية للمعلم */
+.teacher-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* إعدادات صورة المعلم */
+.teacher-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #dfe6e9;
+  margin-right: 1rem;
+}
+
+/* إعدادات تنسيق التذييل */
+footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  background-color: #ffffff;
+  border-top: 2px solid #e0e0e0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  padding: 10px 0;
+  position: sticky; /* استخدم sticky إذا كان هناك حاجة لتثبيت footer في أسفل المحتوى إذا كانت الصفحة أطول */
+  bottom: 0;
+}

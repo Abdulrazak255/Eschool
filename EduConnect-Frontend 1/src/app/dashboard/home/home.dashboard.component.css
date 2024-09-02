@@ -1,0 +1,27 @@
+
+.drawer-container {
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.mat-drawer-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mat-drawer-content {
+  flex: 1;
+  padding: 20px;
+  background: #f4f4f4;
+}
