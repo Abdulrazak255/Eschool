@@ -22,53 +22,24 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder; // Inject the PasswordEncoder
 
     public String authenticate(String username, String password) {
         try {
-            User user = userService.getUserByUsernameOrEmail(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            UserDetails userDetails = userService.loadUserByUsername(username);
 
-            // تحقق من تطابق كلمة المرور العادية بدلاً من استخدام passwordEncoder
-            if (!password.equals(user.getPassword())) {
-                throw new BadCredentialsException("Bad credentials");
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+                throw new BadCredentialsException("Invalid username or password");
             }
 
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), password));
-            UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             return jwtService.generateToken(userDetails);
+        } catch (BadCredentialsException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("Authentication failed for user: " + username, e);
         }
     }
 
-    public User registerTeacher(User user) {
-        return registerUserWithRole(user, UserRole.TEACHER);
-    }
-
-    public User registerManager(User user) {
-        return registerUserWithRole(user, UserRole.MANAGER);
-    }
-
-    public User registerStudent(User user) {
-        return registerUserWithRole(user, UserRole.STUDENT);
-    }
-
-    public User registerParent(User user) {
-        return registerUserWithRole(user, UserRole.PARENT);
-    }
-
-    private User registerUserWithRole(User user, UserRole role) {
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be empty");
-        }
-        // قم بإزالة سطر تشفير كلمة المرور
-        // user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // تأكد من تعيين الأدوار بشكل صحيح
-        Set<UserRole> roles = new HashSet<>();
-        roles.add(role);
-        user.setRoles(roles);
-        return userService.saveUser(user);
-    }
+    // Other methods...
 }
