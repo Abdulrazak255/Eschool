@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerDashbordComponent } from './manager-dashbord.component';
+import { ManagerDashbordComponent } from './manager-dashboard.component';
 
 describe('ManagerTemplateComponent', () => {
   let component: ManagerDashbordComponent;

@@ -19,18 +19,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public UserServiceImpl(UserRepository userRepository,
-                           @Lazy AuthenticationManager authenticationManager,
                            PasswordEncoder passwordEncoder,
-                           JwtService jwtService) {
+                           JwtService jwtService,
+                           @Lazy AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager; // قم بإضافة هذا السطر لتعيين AuthenticationManager
     }
 
     @Override
@@ -69,8 +69,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
-
-
     @Override
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -91,8 +89,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return getUserByUsernameOrEmail(identifier)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email: " + identifier));
     }
-
-
 
     @Override
     public boolean existsByUsername(String username) {
